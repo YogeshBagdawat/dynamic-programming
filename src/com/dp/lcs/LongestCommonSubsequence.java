@@ -38,14 +38,33 @@ public class LongestCommonSubsequence {
 			for (int j = 0; j <= n; j++) {
 				if (i == 0 || j == 0) {
 					l[i][j] = 0;
-				}
-				else if (a[i - 1] == b[j - 1]) {
+				} else if (a[i - 1] == b[j - 1]) {
 					l[i][j] = l[i - 1][j - 1] + 1;
 				} else {
 					l[i][j] = max(l[i - 1][j], l[i][j - 1]);
 				}
 			}
 		}
+
+		int index = l[m][n];
+		char[] charseq = new char[index+1];
+		charseq[index] =' ';
+		int i = m, j = n;
+		while (i > 0 & j > 0) {
+			if(a[i-1]==b[j-1]) {
+				charseq[index-1] = a[i-1];
+				i--;
+				j--;
+				index--;
+			}
+			else if(l[i][j-1]>l[i-1][j]) {
+				j--;
+			}
+			else {
+				i--;
+			}
+		}
+		System.out.println(charseq);
 		return l[m][n];
 	}
 
