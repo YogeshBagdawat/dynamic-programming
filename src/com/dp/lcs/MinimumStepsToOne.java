@@ -6,14 +6,14 @@ public class MinimumStepsToOne {
 
 	public static void main(String[] args) {
 		MinimumStepsToOne m = new MinimumStepsToOne();
-		m.fillArray(9);
-		System.out.println(m.minimumStep(10));
+		m.fillArray(11);
+		System.out.println(m.minimumStep(11));
 	}
 
 	int[] dp;
 
 	public void fillArray(int n) {
-		dp = new int[11];
+		dp = new int[n+1];
 		Arrays.fill(dp, -1);
 	}
 
@@ -40,7 +40,7 @@ public class MinimumStepsToOne {
 		return r > i ? i : r;
 	}
 
-	public int minimumStep(int n) {
+	private int minimumStep(int n) {
 		dp[1] = 0;
 		for (int i = 2; i <= n; i++) {
 			dp[i] = 1 + dp[i - 1];
@@ -52,6 +52,11 @@ public class MinimumStepsToOne {
 			}
 		}
 		return dp[n];
+	}
+	
+	public int minimumStepA(int n) {
+		fillArray(n+1);
+		return minimumStep(n);
 	}
 
 }
